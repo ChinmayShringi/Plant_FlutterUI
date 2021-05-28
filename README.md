@@ -1,7 +1,7 @@
 # Plant_FlutterUI
 
 
-A Flutter template. <a targer="_blank" href="https://dribbble.com/shots/6158149-Plant-Shop/attachments/1320400">Inspiration</a>
+A Flutter template. <a target="_blank" href="https://dribbble.com/shots/6158149-Plant-Shop/attachments/1320400">Inspiration</a>
 
 
 ## Application UI
