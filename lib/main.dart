@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:plant/plantCard.dart';
+import 'package:flutter/services.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+  ));
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      home: HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage>
+class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   TabController tabController;
 
@@ -29,101 +36,113 @@ class _MyHomePageState extends State<MyHomePage>
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
-        body: ListView(
-      children: <Widget>[
-        SizedBox(height: 15.0),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.only(right: 10.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.menu),
+        appBar: AppBar(
+          toolbarHeight: size.height / 20,
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          leading: Padding(
+            padding: EdgeInsets.only(left: 30),
+            child: IconButton(
+              icon: Icon(
+                Icons.menu,
+                size: 30.0,
+                color: Colors.grey,
+              ),
+              onPressed: () {},
+            ),
+          ),
+          actions: [
+            Padding(
+              padding: EdgeInsets.only(right: 30),
+              child: FloatingActionButton(
                 onPressed: () {},
+                backgroundColor: Colors.grey.withOpacity(0.3),
+                mini: true,
+                elevation: 0.0,
+                child: Icon(
+                  Icons.shopping_cart_outlined,
+                  color: Colors.black.withOpacity(0.8),
+                  size: 30.0,
+                ),
               ),
-              FloatingActionButton(
-                  onPressed: () {},
-                  backgroundColor: Colors.grey.withOpacity(0.3),
-                  mini: true,
-                  elevation: 0.0,
-                  child: Icon(Icons.shopping_cart,
-                      color: Colors.black, size: 17.0)),
-            ],
-          ),
+            ),
+          ],
         ),
-        Padding(
-          padding: const EdgeInsets.all(14.0),
-          child: Text(
-            'Top Picks',
-            style: TextStyle(
-                fontFamily: 'Montserrat',
-                fontSize: 40.0,
-                fontWeight: FontWeight.w500),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: 15.0),
-          child: TabBar(
-            controller: tabController,
-            indicatorColor: Colors.transparent,
-            labelColor: Colors.black,
-            unselectedLabelColor: Colors.grey.withOpacity(0.5),
-            isScrollable: true,
-            tabs: <Widget>[
-              Tab(
-                child: Text(
-                  'Top',
-                  style: TextStyle(
-                      fontSize: 17.0,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.bold),
-                ),
+        body: ListView(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 40, bottom: 30.0, top: 15),
+              child: Text(
+                'Top Picks',
+                style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.w600),
               ),
-              Tab(
-                child: Text(
-                  'Outdoor',
-                  style: TextStyle(
-                      fontSize: 17.0,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.bold),
-                ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 30.0, top: 5, bottom: 12),
+              child: TabBar(
+                controller: tabController,
+                indicatorColor: Colors.transparent,
+                labelColor: Colors.black,
+                unselectedLabelColor: Colors.grey.withOpacity(0.6),
+                isScrollable: true,
+                tabs: <Widget>[
+                  Tab(
+                    child: Text(
+                      'Top',
+                      style: TextStyle(
+                          fontSize: 17.0,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Tab(
+                    child: Text(
+                      'Outdoor',
+                      style: TextStyle(
+                          fontSize: 17.0,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Tab(
+                    child: Text(
+                      'Indoor',
+                      style: TextStyle(
+                          fontSize: 17.0,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Tab(
+                    child: Text(
+                      'Plants',
+                      style: TextStyle(
+                          fontSize: 17.0,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold),
+                    ),
+                  )
+                ],
               ),
-              Tab(
-                child: Text(
-                  'Indoor',
-                  style: TextStyle(
-                      fontSize: 17.0,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.bold),
-                ),
+            ),
+            Container(
+              height: size.height - 100.0,
+              child: TabBarView(
+                controller: tabController,
+                children: <Widget>[
+                  PlantCard(),
+                  PlantCard(),
+                  PlantCard(),
+                  PlantCard(),
+                ],
               ),
-              Tab(
-                child: Text(
-                  'Plants',
-                  style: TextStyle(
-                      fontSize: 17.0,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.bold),
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          height: MediaQuery.of(context).size.height - 200.0,
-          child: TabBarView(
-            controller: tabController,
-            children: <Widget>[
-              Text('a'),
-              Text('a'),
-              Text('a'),
-              Text('a'),
-            ],
-          ),
-        )
-      ],
-    ));
+            )
+          ],
+        ));
   }
 }
