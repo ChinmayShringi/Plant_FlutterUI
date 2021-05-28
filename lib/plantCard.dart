@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plant/plantDetails.dart';
 
 class PlantCard extends StatefulWidget {
   @override
@@ -94,163 +95,195 @@ class _PlantCardState extends State<PlantCard> {
 
   _buildCard(size, String imgPath, String price, String plantType,
       String plantName, color) {
-    return Stack(
-      children: <Widget>[
-        Container(
-          height: size.height / 2.1,
-          width: size.width / 1.6,
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              color: color,
-            ),
-            height: 250.0,
-            width: 225.0,
-            child: Column(
-              children: <Widget>[
-                Stack(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            SizedBox(height: 10.0),
-                            Text(
-                              'FROM',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 12.0,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white.withOpacity(0.6)),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PlantDetail(),
+          ),
+        );
+      },
+      child: Stack(
+        children: <Widget>[
+          Container(
+            height: size.height / 2.1,
+            width: size.width / 1.6,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                color: color,
+              ),
+              height: 250.0,
+              width: 225.0,
+              child: Column(
+                children: <Widget>[
+                  Stack(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Column(
+                            children: <Widget>[
+                              SizedBox(height: 10.0),
+                              Text(
+                                'FROM',
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontSize: 12.0,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white.withOpacity(0.6)),
+                              ),
+                              Text(
+                                '\$' + price,
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white),
+                              )
+                            ],
+                          ),
+                          SizedBox(width: 10.0)
+                        ],
+                      ),
+                      Positioned(
+                        top: size.height / 5,
+                        left: size.width / 5,
+                        child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  spreadRadius: 0,
+                                  blurRadius: 70,
+                                  offset: Offset(
+                                      0, 0), // changes position of shadow
+                                ),
+                              ],
                             ),
-                            Text(
-                              '\$' + price,
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white),
-                            )
-                          ],
+                            child: Container(
+                              height: 40,
+                              width: 50,
+                            )),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: Image(
+                          image: AssetImage(imgPath),
+                          height: size.height / 3.2,
                         ),
-                        SizedBox(width: 10.0)
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 10),
-                      child: Image(
-                        image: AssetImage(imgPath),
-                        height: size.height / 3.2,
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      SizedBox(width: size.width / 10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            plantType,
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 10.0,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white.withOpacity(0.6)),
+                          ),
+                          Text(
+                            plantName,
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white),
+                          )
+                        ],
                       ),
-                    )
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    SizedBox(width: size.width / 10),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          plantType,
-                          style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 10.0,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white.withOpacity(0.6)),
-                        ),
-                        Text(
-                          plantName,
-                          style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: size.height / 80),
-                Row(
-                  children: <Widget>[
-                    SizedBox(width: size.width / 10),
-                    Container(
-                      height: 30.0,
-                      width: 30.0,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                            color: Colors.grey,
-                            style: BorderStyle.solid,
-                            width: 0.5),
-                        borderRadius: BorderRadius.circular(5.0),
-                        color: Colors.transparent,
-                      ),
-                      child: Icon(Icons.wb_sunny_outlined,
-                          color: Colors.white.withOpacity(0.4), size: 20.0),
-                    ),
-                    SizedBox(width: 15.0),
-                    Container(
-                      height: 30.0,
-                      width: 30.0,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                            color: Colors.grey,
-                            style: BorderStyle.solid,
-                            width: 0.5),
-                        borderRadius: BorderRadius.circular(5.0),
-                        color: Colors.transparent,
-                      ),
-                      child: Icon(Icons.water_damage_outlined,
-                          color: Colors.white.withOpacity(0.4), size: 20.0),
-                    ),
-                    SizedBox(width: 15.0),
-                    Container(
-                      height: 30.0,
-                      width: 30.0,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                            color: Colors.grey,
-                            style: BorderStyle.solid,
-                            width: 0.5),
-                        borderRadius: BorderRadius.circular(5.0),
-                        color: Colors.transparent,
-                      ),
-                      child: Icon(Icons.thermostat_outlined,
-                          color: Colors.white.withOpacity(0.4), size: 20.0),
-                    ),
-                    SizedBox(width: 10.0),
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
+                    ],
+                  ),
+                  SizedBox(height: size.height / 80),
+                  Row(
+                    children: <Widget>[
+                      SizedBox(width: size.width / 10),
+                      Container(
                         height: 30.0,
                         width: 30.0,
                         decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Colors.grey,
+                              style: BorderStyle.solid,
+                              width: 0.5),
+                          borderRadius: BorderRadius.circular(5.0),
                           color: Colors.transparent,
                         ),
-                        child: Icon(Icons.help_outline,
+                        child: Icon(Icons.wb_sunny_outlined,
                             color: Colors.white.withOpacity(0.4), size: 20.0),
                       ),
-                    )
-                  ],
-                )
-              ],
+                      SizedBox(width: 15.0),
+                      Container(
+                        height: 30.0,
+                        width: 30.0,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Colors.grey,
+                              style: BorderStyle.solid,
+                              width: 0.5),
+                          borderRadius: BorderRadius.circular(5.0),
+                          color: Colors.transparent,
+                        ),
+                        child: Icon(Icons.water_damage_outlined,
+                            color: Colors.white.withOpacity(0.4), size: 20.0),
+                      ),
+                      SizedBox(width: 15.0),
+                      Container(
+                        height: 30.0,
+                        width: 30.0,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Colors.grey,
+                              style: BorderStyle.solid,
+                              width: 0.5),
+                          borderRadius: BorderRadius.circular(5.0),
+                          color: Colors.transparent,
+                        ),
+                        child: Icon(Icons.thermostat_outlined,
+                            color: Colors.white.withOpacity(0.4), size: 20.0),
+                      ),
+                      SizedBox(width: 10.0),
+                      InkWell(
+                        child: Container(
+                          height: 30.0,
+                          width: 30.0,
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                          ),
+                          child: Icon(Icons.help_outline,
+                              color: Colors.white.withOpacity(0.4), size: 20.0),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: 90.0, top: size.height / 2.3),
-          child: Container(
-            height: 60.0,
-            width: 60.0,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50.0), color: Colors.black),
-            child: Center(
-                child: Icon(Icons.shopping_cart_outlined, color: Colors.white)),
-          ),
-        )
-      ],
+          Padding(
+            padding: EdgeInsets.only(left: 90.0, top: size.height / 2.3),
+            child: Container(
+              height: 60.0,
+              width: 60.0,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50.0),
+                  color: Colors.black),
+              child: Center(
+                  child:
+                      Icon(Icons.shopping_cart_outlined, color: Colors.white)),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
